@@ -27,7 +27,7 @@ void shell(int* items, int count)
 }
 
 
-void qs(int* items, int left, int right) //вызов функции: qs(items, 0, count-1);
+void qs(int* items, int left, int right) //РІС‹Р·РѕРІ С„СѓРЅРєС†РёРё: qs(items, 0, count-1);
 {
     int i, j;
     int x, y;
@@ -36,7 +36,7 @@ void qs(int* items, int left, int right) //вызов функции: qs(items, 0, count-1);
 
     i = left; j = right;
 
-    /* выбор компаранда */
+    /* РІС‹Р±РѕСЂ РєРѕРјРїР°СЂР°РЅРґР° */
     x = items[(left + right) / 2];
 
     do {
@@ -59,7 +59,7 @@ void Time(int* masshell,int *masqs, int* masbibl, int razmmas, string nazvanie) 
 
    
 
-    clock_t start, end; // объявляем переменные для определения времени выполнения
+    clock_t start, end; // РѕР±СЉСЏРІР»СЏРµРј РїРµСЂРµРјРµРЅРЅС‹Рµ РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ РІСЂРµРјРµРЅРё РІС‹РїРѕР»РЅРµРЅРёСЏ
     start = clock();
     shell(masshell, razmmas);
     end = clock();
@@ -88,9 +88,9 @@ int main() {
     setlocale(LC_ALL, "Rus");
 
     string sluch, vozrast, ubiv;
-    sluch = "случайно заполненный";
-    vozrast = "возрастающий";
-    ubiv = " убывающий";
+    sluch = "СЃР»СѓС‡Р°Р№РЅРѕ Р·Р°РїРѕР»РЅРµРЅРЅС‹Р№";
+    vozrast = "РІРѕР·СЂР°СЃС‚Р°СЋС‰РёР№";
+    ubiv = " СѓР±С‹РІР°СЋС‰РёР№";
     int* masshell, * masqs, * masbibl;
     
     for (int razmmas = 5000; razmmas <= 125000; razmmas *= 5) {
@@ -101,16 +101,16 @@ int main() {
 
 
 
-        srand(time(NULL)); // инициализируем параметры генератора случайных чисел 
+        srand(time(NULL)); // РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РїР°СЂР°РјРµС‚СЂС‹ РіРµРЅРµСЂР°С‚РѕСЂР° СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃРµР» 
 
         for (int i = 0; i < razmmas;i++) {
-            masshell[i] = rand() % 10000 - 5001; // заполняем массив случайными числами
+            masshell[i] = rand() % 10000 - 5001; // Р·Р°РїРѕР»РЅСЏРµРј РјР°СЃСЃРёРІ СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё
             masqs[i] = masshell[i];
             masbibl[i] = masshell[i];
 
         }
 
-        cout << "-----------------------------------------------\n Размер массива = " << razmmas << "\n\n" << " Время сортировки массива при помощи: \n\n";
+        cout << "-----------------------------------------------\n Р Р°Р·РјРµСЂ РјР°СЃСЃРёРІР° = " << razmmas << "\n\n" << " Р’СЂРµРјСЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РјР°СЃСЃРёРІР° РїСЂРё РїРѕРјРѕС‰Рё: \n\n";
 
         Time(masshell, masqs, masbibl, razmmas, sluch);
 
