@@ -62,7 +62,7 @@ int main() {
 
     int* masshell, * masqs, * masbibl;
     clock_t start, end; // объявляем переменные для определения времени выполнения
-    for (int razmmas = 1000; razmmas <= 100000; razmmas *= 5) {
+    for (int razmmas = 5000; razmmas <= 125000; razmmas *= 5) {
 
         masshell = new int[razmmas];
         masqs = new int[razmmas];
@@ -98,7 +98,32 @@ int main() {
         timee = (double)(end - start) / CLOCKS_PER_SEC;
         cout << "Время сортировки bibl случайно заполненного массива размера  " << razmmas << " = " << timee << "\n\n";
 
-        
+        for (int i = 0; i < razmmas; i++) {
+            masqs[i] = masshell[i];
+            masbibl[i] = masshell[i];
+
+        }
+
+        start = clock();
+        shell(masshell, razmmas);
+        end = clock();
+        timee = (double)(end - start) / CLOCKS_PER_SEC;
+        cout << "Время сортировки Shell возрастающего массива размера  " << razmmas << " = " << timee << "\n";
+
+
+        start = clock();
+        qs(masqs, 0, razmmas - 1);
+        end = clock();
+        timee = (double)(end - start) / CLOCKS_PER_SEC;
+        cout << "Время сортировки qs возрастающего массива размера  " << razmmas << " = " << timee << "\n";
+
+
+        start = clock();
+        sort(masbibl, masbibl + razmmas);
+        end = clock();
+        timee = (double)(end - start) / CLOCKS_PER_SEC;
+        cout << "Время сортировки bibl возрастающего массива размера  " << razmmas << " = " << timee << "\n\n";
+
 
         free(masshell);
         free(masqs);
