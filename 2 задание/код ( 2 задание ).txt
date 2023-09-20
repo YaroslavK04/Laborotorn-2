@@ -55,7 +55,7 @@ void qs(int* items, int left, int right) //вызов функции: qs(items, 
     if (i < right) qs(items, i, right);
 }
 
-void Time(int* masshell,int *masqs, int* masbibl, int razmmas, string nazvanie) {
+void Time(int* masshell,int *masqs, int* masbibl, int razmmas, string nazvanie) { // функция для подсчёта времени работы сортировок и вывода результатов еа экран
 
    
 
@@ -63,7 +63,7 @@ void Time(int* masshell,int *masqs, int* masbibl, int razmmas, string nazvanie) 
     start = clock();
     shell(masshell, razmmas);
     end = clock();
-    double timee = (double)(end - start) / CLOCKS_PER_SEC;
+    double timee = (double)(end - start) / CLOCKS_PER_SEC; // вычисляем время сортировки и переводим его в секунды
     cout << "Shell " << nazvanie  << " = " << timee << "\n";
 
 
@@ -93,9 +93,9 @@ int main() {
     ubiv = " убывающий";
     int* masshell, * masqs, * masbibl;
     
-    for (int razmmas = 5000; razmmas <= 125000; razmmas *= 5) {
+    for (int razmmas = 5000; razmmas <= 125000; razmmas *= 5) { // цикл для автоматического ввода размера массива 
 
-        masshell = new int[razmmas];
+        masshell = new int[razmmas]; // объявление массивов
         masqs = new int[razmmas];
         masbibl = new int[razmmas];
 
@@ -114,7 +114,7 @@ int main() {
 
         Time(masshell, masqs, masbibl, razmmas, sluch);
 
-        for (int i = 0; i < razmmas; i++) {
+        for (int i = 0; i < razmmas; i++) { // заполняем массив возрастающими числами
             masqs[i] = masshell[i];
             masbibl[i] = masshell[i];
 
@@ -122,7 +122,7 @@ int main() {
 
         Time(masshell, masqs, masbibl, razmmas, vozrast);
 
-        for (int i = 0; i < razmmas; i++) {
+        for (int i = 0; i < razmmas; i++) { // заполняем массив убывающими числами
             masqs[i] = masshell[razmmas - 1 - i];
             masbibl[i] = masshell[razmmas - 1 - i];
         }
