@@ -4,6 +4,7 @@
 #include<iostream>
 #include <algorithm>
 #include<string>
+#include<fstream>
 
 using namespace std;
 
@@ -55,44 +56,55 @@ void qs(int* items, int left, int right) //вызов функции: qs(items, 0, count-1);
     if (i < right) qs(items, i, right);
 }
 
-void Time(int* masshell,int *masqs, int* masbibl, int razmmas, string nazvanie) { // функция для подсчёта времени работы сортировок и вывода результатов еа экран
+void Time(int* masshell, int* masqs, int* masbibl, int razmmas, string nazvanie) { // функция для подсчёта времени работы сортировок и вывода результатов еа экран
 
-   
+    ofstream output;
+    output.open("fil.txt", ofstream::app);
 
+    double time1, time2, timee;
     clock_t start, end; // объявляем переменные для определения времени выполнения
     start = clock();
     shell(masshell, razmmas);
     end = clock();
-    double timee = (double)(end - start) / CLOCKS_PER_SEC; // вычисляем время сортировки и переводим его в секунды
-    cout << "Shell " << nazvanie  << " = " << timee << "\n";
+    timee = (double)(end - start) / CLOCKS_PER_SEC; // вычисляем время сортировки и переводим его в секунды
+    cout << "Shell " << nazvanie << " = " << timee << "\n";
 
 
     start = clock();
     qs(masqs, 0, razmmas - 1);
     end = clock();
-    timee = (double)(end - start) / CLOCKS_PER_SEC;
-    cout << " qs " << nazvanie  << " = " << timee << "\n";
+    time1 = (double)(end - start) / CLOCKS_PER_SEC;
+    cout << " qs " << nazvanie << " = " << timee << "\n";
 
 
     start = clock();
     sort(masbibl, masbibl + razmmas);
     end = clock();
-    timee = (double)(end - start) / CLOCKS_PER_SEC;
-    cout << " bibl " << nazvanie  << " = " << timee << "\n\n";
+    time2 = (double)(end - start) / CLOCKS_PER_SEC;
+    cout << " bibl " << nazvanie << " = " << timee << "\n\n";
+    output << "-------------------------------\n";
 
+    output << "| " << nazvanie << " | " << timee << " | " << time1 << " | " << time2 << " |\n";
+
+    output.close();
 }
 
 int main() {
+    remove("fil.txt");
     setvbuf(stdin, NULL, _IONBF, 0);
     setvbuf(stdout, NULL, _IONBF, 0);
     setlocale(LC_ALL, "Rus");
 
     string sluch, vozrast, ubiv;
-    sluch = "случайно заполненный";
-    vozrast = "возрастающий";
-    ubiv = " убывающий";
+    sluch = "rand";
+    vozrast = "up";
+    ubiv = " down";
     int* masshell, * masqs, * masbibl;
-    
+    ofstream file;
+
+
+
+
     for (int razmmas = 5000; razmmas <= 125000; razmmas *= 5) { // цикл для автоматического ввода размера массива 
 
         masshell = new int[razmmas]; // объявление массивов
@@ -100,7 +112,7 @@ int main() {
         masbibl = new int[razmmas];
 
 
-
+        file.open("fil.txt", ofstream::app);
         srand(time(NULL)); // инициализируем параметры генератора случайных чисел 
 
         for (int i = 0; i < razmmas;i++) {
@@ -110,9 +122,15 @@ int main() {
 
         }
 
-        cout << "-----------------------------------------------\n Размер массива = " << razmmas << "\n\n" << " Время сортировки массива при помощи: \n\n";
+        file << "-------------------------------\n Размер массива = " << razmmas << "\n";
+        file << "-------------------------------\n";
+        file << "|     | shell |  qs   |  bibl |\n";
+
+        file.close();
+
 
         Time(masshell, masqs, masbibl, razmmas, sluch);
+
 
         for (int i = 0; i < razmmas; i++) { // заполняем массив возрастающими числами
             masqs[i] = masshell[i];
@@ -130,13 +148,14 @@ int main() {
         for (int i = 0; i < razmmas; i++) {
             masshell[i] = masbibl[i];
         }
-         
+
         Time(masshell, masqs, masbibl, razmmas, ubiv);
-            
+
 
         free(masshell);
         free(masqs);
         free(masbibl);
 
     }
+    file << "\n\n\n\n";
 }
